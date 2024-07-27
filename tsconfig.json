@@ -38,7 +38,8 @@
       "@app": ["./src/app"],
       "@app/*": ["./src/app/*"],
       "@package-json": ["./package.json"],
-      "@constants": ["./src/constants"]
+      "@constants": ["./src/constants"],
+      "@theme": ["./src/theme"]
     },
     "allowJs": true,
     "incremental": true,
@@ -53,10 +54,9 @@
     "./src/**/*",
     "./src/**/*.json",
     ".next/types/**/*.ts",
-    "postcss.config.js",
+    "postcss.config.cjs",
     "next-env.d.ts",
-    "env.d.ts",
-    "next.config.js",
+    "next.config.mjs",
     ".eslintrc.js"
   ]
 }

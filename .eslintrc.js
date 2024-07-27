@@ -14,6 +14,7 @@ module.exports = {
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
     "plugin:prettier/recommended",
+    "plugin:@next/next/recommended",
   ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
@@ -45,6 +46,7 @@ module.exports = {
     "react-hooks/rules-of-hooks": 0,
     "react-hooks/exhaustive-deps": 0,
     "react/display-name": 0,
+    "no-unused-vars": "off",
     "no-undef": 1,
     "no-console": 1,
     "newline-before-return": 2,
