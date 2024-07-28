@@ -14,14 +14,16 @@ export default function RootLayout({ children }: { children: ReactNode }): JSX.E
     <html lang="en">
       <head>
         <link rel="shortcut icon" href="/favicon.svg" />
-        <ColorSchemeScript />
+        <ColorSchemeScript defaultColorScheme="dark" />
         <meta
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no"
         />
       </head>
       <body>
-        <MantineProvider theme={theme}>{children}</MantineProvider>
+        <MantineProvider defaultColorScheme="dark" theme={theme}>
+          {children}
+        </MantineProvider>
       </body>
     </html>
   );
