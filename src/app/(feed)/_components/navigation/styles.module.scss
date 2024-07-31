@@ -1,3 +1,8 @@
+.wrapper {
+  top: var(--mantine-spacing-md);
+  position: sticky;
+}
+
 .navlink {
   border-radius: var(--mantine-radius-md);
 }

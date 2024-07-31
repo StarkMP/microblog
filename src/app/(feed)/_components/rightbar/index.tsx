@@ -3,9 +3,11 @@ import { IconSearch } from "@tabler/icons-react";
 import Link from "next/link";
 import type { JSX } from "react";
 
+import styles from "./styles.module.scss";
+
 export const Rightbar = (): JSX.Element => {
   return (
-    <Stack>
+    <Stack className={styles.wrapper}>
       <TextInput
         radius="md"
         variant="filled"

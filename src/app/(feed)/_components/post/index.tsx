@@ -2,9 +2,11 @@ import { Avatar, Badge, Card, Group, Text, Title } from "@mantine/core";
 import { IconEye, IconMessageCircle, IconThumbDown, IconThumbUp } from "@tabler/icons-react";
 import type { JSX } from "react";
 
+import styles from "./styles.module.scss";
+
 export const Post = (): JSX.Element => {
   return (
-    <Card shadow="sm" padding="md" radius="md">
+    <Card shadow="sm" padding="md" radius="md" className={styles.wrapper}>
       <Group justify="space-between" align="center" mb="md">
         <Group align="center" gap={8}>
           <Avatar color="pink" radius="xl" size="sm">
