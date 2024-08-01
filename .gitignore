@@ -3,4 +3,5 @@ node_modules
 tsconfig.tsbuildinfo
 .turbo
 .env
+.env.development
 .env.production

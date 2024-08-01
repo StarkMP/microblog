@@ -45,10 +45,10 @@
     "@mantine/core": "7.11.2",
     "@mantine/hooks": "7.11.2",
     "@tabler/icons-react": "3.11.0",
-    "framer-motion": "11.3.17",
     "next": "14.2.5",
     "react": "18.3.1",
-    "react-dom": "18.3.1"
+    "react-dom": "18.3.1",
+    "react-infinite-scroll-component": "6.1.0"
   },
   "engines": {
     "node": "^20"

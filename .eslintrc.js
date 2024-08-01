@@ -48,7 +48,7 @@ module.exports = {
     "react/display-name": 0,
     "no-unused-vars": "off",
     "no-undef": 1,
-    "no-console": 1,
+    "no-console": 0,
     "newline-before-return": 2,
     indent: 0,
     "linebreak-style": 0,

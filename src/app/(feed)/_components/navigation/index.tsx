@@ -1,3 +1,5 @@
+"use client";
+
 import { Anchor, Card, NavLink, Stack, Text } from "@mantine/core";
 import { LogoIcon } from "@ui/icons";
 import Link from "next/link";
