@@ -1,6 +1,7 @@
 import { Button, Container, Group } from "@mantine/core";
 import { IconLogin2 } from "@tabler/icons-react";
 import { LogoIcon } from "@ui/icons";
+import Link from "next/link";
 import type { JSX } from "react";
 
 import styles from "./styles.module.scss";
@@ -12,10 +13,16 @@ export const Header = (): JSX.Element => {
         <Group justify="space-between" style={{ width: "100%" }}>
           <LogoIcon />
           <Group gap="xs">
-            <Button variant="light" radius="md" leftSection={<IconLogin2 size={20} />}>
+            <Button
+              component={Link}
+              href="/login"
+              variant="light"
+              radius="md"
+              leftSection={<IconLogin2 size={20} />}
+            >
               Sign In
             </Button>
-            <Button variant="default" radius="md">
+            <Button component={Link} href="/signup" variant="default" radius="md">
               Create account
             </Button>
           </Group>

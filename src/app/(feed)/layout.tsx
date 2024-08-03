@@ -5,9 +5,16 @@ import type { JSX, ReactNode } from "react";
 
 import { Header, Navigation, Rightbar } from "./_components";
 
-export default function FeedLayout({ children }: { children: ReactNode }): JSX.Element {
+export default function FeedLayout({
+  children,
+  auth,
+}: {
+  children: ReactNode;
+  auth: ReactNode;
+}): JSX.Element {
   return (
     <>
+      {auth}
       <Header />
       <Container size="xl" pb="md" pt="md">
         <Grid>
