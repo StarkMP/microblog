@@ -1,2 +1,2 @@
-export { SignUpModal } from "./signup-modal";
-export { LoginModal } from "./login-modal";
+export { SignUpModal, SignUpForm } from "./signup";
+export { LoginModal, LoginForm } from "./login";
