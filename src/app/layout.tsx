@@ -1,7 +1,10 @@
 import "@mantine/core/styles.css";
 
+import StoreProvider from "@app/store-provider";
+import { ACCESS_TOKEN_COOKIE_NAME, REFRESH_TOKEN_COOKIE_NAME } from "@constants";
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 import { theme } from "@theme";
+import { cookies } from "next/headers";
 import type { JSX, ReactNode } from "react";
 
 export const metadata = {
@@ -10,6 +13,10 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }: { children: ReactNode }): JSX.Element {
+  const cookieStore = cookies();
+  const isAuth =
+    cookieStore.has(ACCESS_TOKEN_COOKIE_NAME) || cookieStore.has(REFRESH_TOKEN_COOKIE_NAME);
+
   return (
     <html lang="en">
       <head>
@@ -21,9 +28,11 @@ export default function RootLayout({ children }: { children: ReactNode }): JSX.E
         />
       </head>
       <body>
-        <MantineProvider defaultColorScheme="dark" theme={theme}>
-          {children}
-        </MantineProvider>
+        <StoreProvider isAuth={isAuth}>
+          <MantineProvider defaultColorScheme="dark" theme={theme}>
+            {children}
+          </MantineProvider>
+        </StoreProvider>
       </body>
     </html>
   );

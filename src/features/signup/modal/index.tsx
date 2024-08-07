@@ -1,3 +1,5 @@
+"use client";
+
 import { Modal } from "@mantine/core";
 import type { JSX } from "react";
 

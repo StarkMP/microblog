@@ -1,6 +1,6 @@
 "use client";
 
-import { getPosts } from "@app/actions/get-posts";
+import { getPosts } from "@app/actions/posts";
 import { Stack, Text, useMantineTheme } from "@mantine/core";
 import { IconCircleX } from "@tabler/icons-react";
 import type { APIGetPostsResponse } from "@typings/api";

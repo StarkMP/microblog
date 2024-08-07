@@ -17,3 +17,19 @@ export type APIGetPostsResponse = {
   skip: number;
   limit: number;
 };
+
+export type APIUserResponse = {
+  id: number;
+  username: string;
+  email: string;
+};
+
+export type APIAuthResponse = APIUserResponse & {
+  token: string;
+  refreshToken: string;
+};
+
+export type APIRefreshTokenResponse = {
+  token: string;
+  refreshToken: string;
+};

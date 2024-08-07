@@ -7,9 +7,5 @@ export const getPosts = async (limit: number, offset: number): Promise<APIGetPos
     next: { revalidate: 10 },
   });
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch posts");
-  }
-
   return res.json() as Promise<APIGetPostsResponse>;
 };
