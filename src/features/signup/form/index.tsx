@@ -1,6 +1,7 @@
 "use client";
 
 import { auth } from "@app/actions/auth";
+import { getProfile } from "@app/actions/private/user";
 import { signUp } from "@app/actions/signup";
 import {
   Anchor,
@@ -61,13 +62,15 @@ export const SignUpForm = (): JSX.Element => {
         password,
       });
 
-      const user = await auth({ username, password });
+      await auth({ username, password });
+
+      const user = await getProfile();
 
       router.push("/");
       router.refresh();
 
       dispatch(login());
-      dispatch(updateUserData({ username: user.username, email: user.email }));
+      dispatch(updateUserData(user));
     } catch (err) {
       setError(true);
     } finally {
@@ -160,8 +163,8 @@ export const SignUpForm = (): JSX.Element => {
       </Group>
 
       {error && (
-        <Text ta="center" c="red">
-          An error occured
+        <Text fz="sm" c="red">
+          Error: Something went wrong
         </Text>
       )}
     </form>

@@ -1,6 +1,7 @@
 "use client";
 
 import { auth } from "@app/actions/auth";
+import { getProfile } from "@app/actions/private/user";
 import { Anchor, Button, Card, Group, PasswordInput, Text, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useAppDispatch } from "@store/hooks";
@@ -32,13 +33,15 @@ export const LoginForm = (): JSX.Element => {
     setFetching(true);
 
     try {
-      const user = await auth({ username, password });
+      await auth({ username, password });
+
+      const user = await getProfile();
 
       router.push("/");
       router.refresh();
 
       dispatch(login());
-      dispatch(updateUserData({ username: user.username, email: user.email }));
+      dispatch(updateUserData(user));
     } catch (err) {
       setError(true);
     } finally {
@@ -91,8 +94,8 @@ export const LoginForm = (): JSX.Element => {
       </Group>
 
       {error && (
-        <Text ta="center" c="red">
-          An error occured
+        <Text fz="sm" c="red">
+          Error: Something went wrong
         </Text>
       )}
     </form>
