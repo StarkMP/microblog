@@ -1,5 +1,6 @@
 import "@mantine/core/styles.css";
 
+import { getProfile } from "@app/actions/private/user";
 import StoreProvider from "@app/store-provider";
 import { ACCESS_TOKEN_COOKIE_NAME, REFRESH_TOKEN_COOKIE_NAME } from "@constants";
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
@@ -9,14 +10,20 @@ import { cookies } from "next/headers";
 import type { JSX, ReactNode } from "react";
 
 export const metadata = {
-  title: "MicroBlog - Share your outlook and knowledges online",
-  description: "MicroBlog is a paltform to share any information between people in internet.",
+  title: "MicroBlog - Share your outlook and knowledges",
+  description: "MicroBlog is a paltform to share any information between people.",
 };
 
-export default function RootLayout({ children }: { children: ReactNode }): JSX.Element {
+export default async function RootLayout({
+  children,
+}: {
+  children: ReactNode;
+}): Promise<JSX.Element> {
   const cookieStore = cookies();
   const hasAccessToken =
     cookieStore.has(ACCESS_TOKEN_COOKIE_NAME) || headersSetCookie().has(ACCESS_TOKEN_COOKIE_NAME);
+  const refreshToken = cookieStore.get(REFRESH_TOKEN_COOKIE_NAME)?.value;
+  const user = hasAccessToken ? await getProfile() : undefined;
 
   return (
     <html lang="en">
@@ -29,10 +36,7 @@ export default function RootLayout({ children }: { children: ReactNode }): JSX.E
         />
       </head>
       <body>
-        <StoreProvider
-          isAuth={hasAccessToken}
-          refreshToken={cookieStore.get(REFRESH_TOKEN_COOKIE_NAME)?.value}
-        >
+        <StoreProvider isAuth={hasAccessToken} user={user} refreshToken={refreshToken}>
           <MantineProvider defaultColorScheme="dark" theme={theme}>
             {children}
           </MantineProvider>
