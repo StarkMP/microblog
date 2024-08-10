@@ -2,12 +2,20 @@ import { refresh } from "@app/actions/auth";
 import { ACCESS_TOKEN_COOKIE_NAME, REFRESH_TOKEN_COOKIE_NAME } from "@constants";
 import { type NextRequest, NextResponse } from "next/server";
 
+const privateRoutes = ["/me"];
+
+const unauthorizedRedirectRoute = "/login";
+
 export async function middleware(request: NextRequest): Promise<NextResponse | void> {
+  const pathname = request.nextUrl.pathname;
   const hasAccessToken = request.cookies.has(ACCESS_TOKEN_COOKIE_NAME);
   const hasRefreshToken = request.cookies.has(REFRESH_TOKEN_COOKIE_NAME);
+  const hasAnyToken = hasAccessToken || hasRefreshToken;
 
-  if (!hasAccessToken && !hasRefreshToken) {
-    return NextResponse.redirect(new URL("/login", request.url));
+  for (const privateRoute of privateRoutes) {
+    if (!hasAnyToken && pathname.startsWith(privateRoute)) {
+      return NextResponse.redirect(new URL(unauthorizedRedirectRoute, request.url));
+    }
   }
 
   if (!hasAccessToken && hasRefreshToken) {
@@ -17,7 +25,7 @@ export async function middleware(request: NextRequest): Promise<NextResponse | v
     try {
       await refresh(refreshToken as string, response.cookies);
     } catch {
-      return NextResponse.redirect(new URL("/login", request.url));
+      return NextResponse.redirect(new URL(unauthorizedRedirectRoute, request.url));
     }
 
     return response;
@@ -25,5 +33,5 @@ export async function middleware(request: NextRequest): Promise<NextResponse | v
 }
 
 export const config = {
-  matcher: ["/me"],
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
 };

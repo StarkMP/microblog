@@ -4,6 +4,7 @@ import StoreProvider from "@app/store-provider";
 import { ACCESS_TOKEN_COOKIE_NAME, REFRESH_TOKEN_COOKIE_NAME } from "@constants";
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 import { theme } from "@theme";
+import { headersSetCookie } from "@utils/cookie";
 import { cookies } from "next/headers";
 import type { JSX, ReactNode } from "react";
 
@@ -14,8 +15,8 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }): JSX.Element {
   const cookieStore = cookies();
-  const isAuth =
-    cookieStore.has(ACCESS_TOKEN_COOKIE_NAME) || cookieStore.has(REFRESH_TOKEN_COOKIE_NAME);
+  const hasAccessToken =
+    cookieStore.has(ACCESS_TOKEN_COOKIE_NAME) || headersSetCookie().has(ACCESS_TOKEN_COOKIE_NAME);
 
   return (
     <html lang="en">
@@ -28,7 +29,10 @@ export default function RootLayout({ children }: { children: ReactNode }): JSX.E
         />
       </head>
       <body>
-        <StoreProvider isAuth={isAuth}>
+        <StoreProvider
+          isAuth={hasAccessToken}
+          refreshToken={cookieStore.get(REFRESH_TOKEN_COOKIE_NAME)?.value}
+        >
           <MantineProvider defaultColorScheme="dark" theme={theme}>
             {children}
           </MantineProvider>
