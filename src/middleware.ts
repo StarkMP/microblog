@@ -11,10 +11,13 @@ export async function middleware(request: NextRequest): Promise<NextResponse | v
   const hasAccessToken = request.cookies.has(ACCESS_TOKEN_COOKIE_NAME);
   const hasRefreshToken = request.cookies.has(REFRESH_TOKEN_COOKIE_NAME);
   const hasAnyToken = hasAccessToken || hasRefreshToken;
+  const unauthorizedRedirectResponse = NextResponse.redirect(
+    new URL(unauthorizedRedirectRoute, request.url)
+  );
 
   for (const privateRoute of privateRoutes) {
     if (!hasAnyToken && pathname.startsWith(privateRoute)) {
-      return NextResponse.redirect(new URL(unauthorizedRedirectRoute, request.url));
+      return unauthorizedRedirectResponse;
     }
   }
 
@@ -25,7 +28,7 @@ export async function middleware(request: NextRequest): Promise<NextResponse | v
     try {
       await refresh(refreshToken as string, response.cookies);
     } catch {
-      return NextResponse.redirect(new URL(unauthorizedRedirectRoute, request.url));
+      return unauthorizedRedirectResponse;
     }
 
     return response;
