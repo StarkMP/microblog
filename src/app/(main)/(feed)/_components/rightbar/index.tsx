@@ -1,21 +1,31 @@
 "use client";
 
-import { Anchor, Card, Stack, TextInput, Title } from "@mantine/core";
+import { Anchor, Card, Stack, TextInput, Title, useMantineTheme } from "@mantine/core";
+import { useAppDispatch, useAppSelector } from "@store/hooks";
+import { updateSearch } from "@store/reducers/feed";
 import { IconSearch } from "@tabler/icons-react";
 import Link from "next/link";
-import type { JSX } from "react";
-
-import styles from "./styles.module.scss";
+import type { ChangeEventHandler, JSX } from "react";
 
 export const Rightbar = (): JSX.Element => {
+  const theme = useMantineTheme();
+  const dispatch = useAppDispatch();
+  const searchValue = useAppSelector((state) => state.feed.search);
+
+  const handleSearch: ChangeEventHandler<HTMLInputElement> = (event) => {
+    dispatch(updateSearch(event.currentTarget.value));
+  };
+
   return (
-    <Stack className={styles.wrapper}>
+    <Stack pos="sticky" top={theme.spacing.md}>
       <TextInput
         radius="md"
         variant="filled"
         size="md"
         placeholder="Search..."
         leftSection={<IconSearch size={18} />}
+        value={searchValue}
+        onChange={handleSearch}
       />
       <Card padding="sm" radius="md">
         <Stack gap="xs">

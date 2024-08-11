@@ -42,21 +42,26 @@ export const Post = ({
 
         <Group gap={6}>
           {likes && (
-            <Badge color="green" variant="light" rightSection={<IconThumbUp size={16} />}>
+            <Badge color="green" variant="light" fw={500} rightSection={<IconThumbUp size={16} />}>
               {likes}
             </Badge>
           )}
           {dislikes && (
-            <Badge color="red" variant="light" rightSection={<IconThumbDown size={16} />}>
+            <Badge color="red" variant="light" fw={500} rightSection={<IconThumbDown size={16} />}>
               {dislikes}
             </Badge>
           )}
           {comments && (
-            <Badge color="gray" variant="light" rightSection={<IconMessageCircle size={16} />}>
+            <Badge
+              color="gray"
+              variant="light"
+              fw={500}
+              rightSection={<IconMessageCircle size={16} />}
+            >
               {comments}
             </Badge>
           )}
-          <Badge color="gray" variant="light" rightSection={<IconEye size={16} />}>
+          <Badge color="gray" variant="light" fw={500} rightSection={<IconEye size={16} />}>
             {views}
           </Badge>
         </Group>

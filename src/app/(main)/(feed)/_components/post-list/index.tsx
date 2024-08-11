@@ -2,9 +2,10 @@
 
 import { getPosts } from "@app/actions/posts";
 import { Stack, Text, useMantineTheme } from "@mantine/core";
+import { useAppSelector } from "@store/hooks";
 import { IconCircleX } from "@tabler/icons-react";
 import type { APIGetPostsResponse } from "@typings/api";
-import { type JSX, useEffect, useState } from "react";
+import { type JSX, useEffect, useRef, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import { Post, PostSkeleton } from "..";
@@ -17,10 +18,13 @@ type PostListProps = {
 
 export const PostList = ({ data, limit, offset: initialOffset }: PostListProps): JSX.Element => {
   const [posts, setPosts] = useState(data.posts);
-  const [offset, setOffset] = useState(initialOffset);
   const [hasMore, setHasMore] = useState(data.total > data.posts.length);
   const [fetching, setFetching] = useState(false);
   const [error, setError] = useState(false);
+  const search = useAppSelector((state) => state.feed.search);
+  const searchRef = useRef(search);
+  const searchTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const offsetRef = useRef<number>(initialOffset);
 
   const theme = useMantineTheme();
 
@@ -32,22 +36,64 @@ export const PostList = ({ data, limit, offset: initialOffset }: PostListProps):
     setHasMore(!error);
   }, [error]);
 
-  const loadMore = async (): Promise<void> => {
+  useEffect(() => {
+    searchRef.current = search;
+
+    setError(false);
+    setHasMore(true);
+    setFetching(false);
+
+    clearSearchTimeout();
+
+    if (search) {
+      setPosts([]);
+      offsetRef.current = 0;
+
+      loadMoreBySearch();
+    } else {
+      // if search is empty then we return posts and offset to initial values
+      setPosts(data.posts);
+      offsetRef.current = initialOffset;
+    }
+  }, [search]);
+
+  const loadMoreBySearch = (): void => {
+    // we need to use timeout to avoid a requests flood
+    searchTimeoutRef.current = setTimeout(() => {
+      loadMore(true);
+    }, 300);
+  };
+
+  const clearSearchTimeout = (): void => {
+    if (searchTimeoutRef.current !== null) {
+      clearTimeout(searchTimeoutRef.current);
+      searchTimeoutRef.current = null;
+    }
+  };
+
+  const loadMore = async (startOffset?: boolean): Promise<void> => {
     if (fetching || error) {
       return;
     }
 
+    const currentSearchValue = searchRef.current;
+
     setFetching(true);
 
     try {
-      const nextOffset = offset + limit;
+      const nextOffset = offsetRef.current + limit;
 
-      const data = await getPosts(limit, nextOffset);
+      const data = await getPosts(limit, startOffset ? 0 : nextOffset, currentSearchValue);
 
-      setOffset(nextOffset);
+      // compare this values to avoid conflicts
+      if (currentSearchValue !== searchRef.current) {
+        return;
+      }
+
+      offsetRef.current = nextOffset;
       setPosts((prev) => prev.concat(data.posts));
 
-      if (posts.length >= data.total || data.posts.length === 0) {
+      if (data.posts.length >= data.total || data.posts.length === 0) {
         setHasMore(false);
       }
     } catch (err) {
@@ -64,7 +110,7 @@ export const PostList = ({ data, limit, offset: initialOffset }: PostListProps):
       dataLength={posts.length}
       next={loadMore}
       hasMore={hasMore}
-      loader={<PostSkeleton />}
+      loader={<PostSkeleton hasPosts={posts.length > 0} />}
     >
       <Stack gap="sm">
         {posts.map((post) => {

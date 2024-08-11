@@ -1,0 +1,9 @@
+.profileLink {
+  color: var(--mantine-color-text);
+  cursor: pointer;
+
+  &:hover {
+    transition: color 0.1s;
+    color: var(--mantine-color-anchor);
+  }
+}

@@ -15,11 +15,13 @@ export default function FeedLayout({
   return (
     <>
       <Grid>
-        <Grid.Col span={3}>
+        <Grid.Col span={{ lg: 3 }} order={0}>
           <Navigation />
         </Grid.Col>
-        <Grid.Col span={6}>{children}</Grid.Col>
-        <Grid.Col span={3}>
+        <Grid.Col span={{ lg: 6, md: 12 }} order={2}>
+          {children}
+        </Grid.Col>
+        <Grid.Col span={{ lg: 3 }} order={{ lg: 3, md: 1 }}>
           <Rightbar />
         </Grid.Col>
       </Grid>

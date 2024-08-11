@@ -3,9 +3,9 @@
 import { Card, Group, Skeleton } from "@mantine/core";
 import type { JSX } from "react";
 
-export const PostSkeleton = (): JSX.Element => {
+export const PostSkeleton = ({ hasPosts }: { hasPosts?: boolean }): JSX.Element => {
   return (
-    <Card mt="sm" shadow="sm" padding="md" radius="md">
+    <Card mt={hasPosts ? "md" : 0} shadow="sm" padding="md" radius="md">
       <Group justify="space-between" align="center" mb="md">
         <Group align="center" gap={8}>
           <Skeleton height={26} circle />
