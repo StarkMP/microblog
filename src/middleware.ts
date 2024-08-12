@@ -3,21 +3,34 @@ import { ACCESS_TOKEN_COOKIE_NAME, REFRESH_TOKEN_COOKIE_NAME } from "@constants"
 import { type NextRequest, NextResponse } from "next/server";
 
 const privateRoutes = ["/me"];
+const onlyUnauthorizedRoutes = ["/login", "/signup"];
 
 const unauthorizedRedirectRoute = "/login";
+const authorizedRedirectRoute = "/";
 
 export async function middleware(request: NextRequest): Promise<NextResponse | void> {
   const pathname = request.nextUrl.pathname;
   const hasAccessToken = request.cookies.has(ACCESS_TOKEN_COOKIE_NAME);
   const hasRefreshToken = request.cookies.has(REFRESH_TOKEN_COOKIE_NAME);
   const hasAnyToken = hasAccessToken || hasRefreshToken;
+
   const unauthorizedRedirectResponse = NextResponse.redirect(
     new URL(unauthorizedRedirectRoute, request.url)
+  );
+
+  const authorizedRedirectResponse = NextResponse.redirect(
+    new URL(authorizedRedirectRoute, request.url)
   );
 
   for (const privateRoute of privateRoutes) {
     if (!hasAnyToken && pathname.startsWith(privateRoute)) {
       return unauthorizedRedirectResponse;
+    }
+  }
+
+  for (const onlyUnauthorizedRoute of onlyUnauthorizedRoutes) {
+    if (hasAnyToken && pathname.startsWith(onlyUnauthorizedRoute)) {
+      return authorizedRedirectResponse;
     }
   }
 
