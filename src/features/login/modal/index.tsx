@@ -12,7 +12,7 @@ type LoginModalProps = {
 
 export const LoginModal = ({ opened, onClose }: LoginModalProps): JSX.Element => {
   return (
-    <Modal opened={opened} onClose={onClose} title="Sign In" withinPortal={false} radius="md">
+    <Modal opened={opened} onClose={onClose} title="Sign In" radius="md">
       <LoginForm />
     </Modal>
   );

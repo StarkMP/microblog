@@ -12,13 +12,7 @@ type SignUpModalProps = {
 
 export const SignUpModal = ({ opened, onClose }: SignUpModalProps): JSX.Element => {
   return (
-    <Modal
-      opened={opened}
-      onClose={onClose}
-      title="Create account"
-      withinPortal={false}
-      radius="md"
-    >
+    <Modal opened={opened} onClose={onClose} title="Create account" radius="md">
       <SignUpForm />
     </Modal>
   );
