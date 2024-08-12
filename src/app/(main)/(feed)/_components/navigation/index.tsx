@@ -33,6 +33,7 @@ export const Navigation = (): JSX.Element => {
             <NavLink
               key={id}
               component={Link}
+              prefetch
               href={{
                 query: id && {
                   ...Array.from(searchParams.entries()).reduce(
