@@ -65,10 +65,10 @@ export const Navigation = (): JSX.Element => {
       <Card padding="sm" radius="md">
         <Stack gap="xs">
           <LogoIcon className={styles.logo} />
+          <Text size="sm" c="red.7" fw="bold">
+            WORK IN PROGRESS
+          </Text>
           <Text c="dimmed" size="sm">
-            <Text inherit c="red.7" fw="bold" mb="xs">
-              WORK IN PROGRESS
-            </Text>
             It&apos;s just fake website for GitHub.
             <br />
             All mocked data fetch from{" "}
