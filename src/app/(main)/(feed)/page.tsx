@@ -1,4 +1,4 @@
-import { getPosts } from "@app/actions/posts";
+import { getPosts } from "@app/actions/feed";
 import type { JSX } from "react";
 
 import { PostList } from "./_components";

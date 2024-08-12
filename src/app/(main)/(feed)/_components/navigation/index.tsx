@@ -27,6 +27,7 @@ export const Navigation = (): JSX.Element => {
       <Stack mb="sm" gap="xs">
         {categories.map(({ id, label }) => {
           const queryParamName = "category";
+          const hasQueryParam = searchParams.has(queryParamName);
 
           return (
             <NavLink
@@ -52,7 +53,8 @@ export const Navigation = (): JSX.Element => {
                 label: styles.navlinkLabel,
               }}
               active={
-                searchParams.has(queryParamName, id) || (!id && !searchParams.has(queryParamName))
+                (hasQueryParam && searchParams.get(queryParamName) === id) ||
+                (!id && !hasQueryParam)
               }
             />
           );

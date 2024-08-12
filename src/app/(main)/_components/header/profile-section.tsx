@@ -36,7 +36,7 @@ export const ProfileSection = (): JSX.Element => {
     <Group gap="lg">
       <Group align="center" gap={8} onClick={redirectToProfile} className={styles.profileLink}>
         <Avatar color="pink" radius="xl" size={28}>
-          {userData?.username[0]}
+          {userData?.username[0].toUpperCase()}
         </Avatar>
         <Text fw="bold" size="sm">
           {userData?.username}

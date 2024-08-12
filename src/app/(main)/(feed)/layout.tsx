@@ -1,30 +1,20 @@
-"use client";
-
-import { Grid } from "@mantine/core";
+import { getTags } from "@app/actions/feed";
 import { type JSX, type ReactNode } from "react";
 
-import { Navigation, Rightbar } from "./_components";
+import { ClientFeedLayout } from "./client-layout";
 
-export default function FeedLayout({
+export default async function FeedLayout({
   children,
   auth,
 }: {
   children: ReactNode;
   auth: ReactNode;
-}): JSX.Element {
+}): Promise<JSX.Element> {
+  const tags = await getTags();
+
   return (
     <>
-      <Grid>
-        <Grid.Col span={{ lg: 3 }} order={0}>
-          <Navigation />
-        </Grid.Col>
-        <Grid.Col span={{ lg: 6, md: 12 }} order={2}>
-          {children}
-        </Grid.Col>
-        <Grid.Col span={{ lg: 3 }} order={{ lg: 3, md: 1 }}>
-          <Rightbar />
-        </Grid.Col>
-      </Grid>
+      <ClientFeedLayout trendingTags={tags}>{children}</ClientFeedLayout>
 
       {auth}
     </>

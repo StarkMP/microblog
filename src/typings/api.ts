@@ -33,3 +33,5 @@ export type APIRefreshTokenResponse = {
   token: string;
   refreshToken: string;
 };
+
+export type APIGetTagsResponse = string[];

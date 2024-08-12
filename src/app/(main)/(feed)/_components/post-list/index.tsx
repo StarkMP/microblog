@@ -1,9 +1,9 @@
 "use client";
 
-import { getPosts } from "@app/actions/posts";
+import { getPosts } from "@app/actions/feed";
 import { Stack, Text, useMantineTheme } from "@mantine/core";
 import { useAppSelector } from "@store/hooks";
-import { IconCircleX } from "@tabler/icons-react";
+import { IconCircleX, IconMoodConfuzedFilled, IconSearch } from "@tabler/icons-react";
 import type { APIGetPostsResponse } from "@typings/api";
 import { type JSX, useEffect, useRef, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -49,15 +49,16 @@ export const PostList = ({ data, limit, offset: initialOffset }: PostListProps):
       setPosts([]);
       offsetRef.current = 0;
 
-      loadMoreBySearch();
+      loadPostsBySearch();
     } else {
       // if search is empty then we return posts and offset to initial values
+      setHasMore(data.total > data.posts.length);
       setPosts(data.posts);
       offsetRef.current = initialOffset;
     }
   }, [search]);
 
-  const loadMoreBySearch = (): void => {
+  const loadPostsBySearch = (): void => {
     // we need to use timeout to avoid a requests flood
     searchTimeoutRef.current = setTimeout(() => {
       loadMore(true);
@@ -131,6 +132,14 @@ export const PostList = ({ data, limit, offset: initialOffset }: PostListProps):
             />
           );
         })}
+        {!hasMore && !posts.length && (
+          <Stack align="center" gap="md" p="lg">
+            {search ? <IconSearch size={36} /> : <IconMoodConfuzedFilled size={36} />}
+            <Text ta="center" size="md" fw={500}>
+              {search ? "There are no results for your search request :(" : "There are no posts"}
+            </Text>
+          </Stack>
+        )}
         {error && (
           <Stack align="center" gap={4} mt="lg" mb="lg">
             <IconCircleX size={40} stroke={1.25} style={{ color: theme.colors.red[6] }} />

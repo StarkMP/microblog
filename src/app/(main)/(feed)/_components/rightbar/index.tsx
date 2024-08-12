@@ -7,7 +7,13 @@ import { IconSearch } from "@tabler/icons-react";
 import Link from "next/link";
 import type { ChangeEventHandler, JSX } from "react";
 
-export const Rightbar = (): JSX.Element => {
+const MAX_TRENDING_TAGS = 7;
+
+type RightbarProps = {
+  trendingTags: string[];
+};
+
+export const Rightbar = ({ trendingTags }: RightbarProps): JSX.Element => {
   const theme = useMantineTheme();
   const dispatch = useAppDispatch();
   const searchValue = useAppSelector((state) => state.feed.search);
@@ -32,27 +38,13 @@ export const Rightbar = (): JSX.Element => {
           <Title order={4} fw={600}>
             Trending tags:
           </Title>
-          <Anchor component={Link} href="/">
-            #frontend
-          </Anchor>
-          <Anchor component={Link} href="/">
-            #web
-          </Anchor>
-          <Anchor component={Link} href="/">
-            #backend
-          </Anchor>
-          <Anchor component={Link} href="/">
-            #development
-          </Anchor>
-          <Anchor component={Link} href="/">
-            #react
-          </Anchor>
-          <Anchor component={Link} href="/">
-            #nextjs
-          </Anchor>
-          <Anchor component={Link} href="/">
-            #it
-          </Anchor>
+          <Stack gap="sm">
+            {trendingTags.slice(0, MAX_TRENDING_TAGS).map((tag) => (
+              <Anchor key={tag} component={Link} href="/">
+                #{tag}
+              </Anchor>
+            ))}
+          </Stack>
         </Stack>
       </Card>
     </Stack>
