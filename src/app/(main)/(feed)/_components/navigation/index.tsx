@@ -66,6 +66,9 @@ export const Navigation = (): JSX.Element => {
         <Stack gap="xs">
           <LogoIcon className={styles.logo} />
           <Text c="dimmed" size="sm">
+            <Text inherit c="red.7" fw="bold" mb="xs">
+              WORK IN PROGRESS
+            </Text>
             It&apos;s just fake website for GitHub.
             <br />
             All mocked data fetch from{" "}
