@@ -11,7 +11,7 @@ export default function LoginPage(): JSX.Element {
 
   const onClose = (): void => {
     close();
-    router.push("/");
+    router.push("/", { scroll: false });
   };
 
   return <LoginModal opened={opened} onClose={onClose} />;

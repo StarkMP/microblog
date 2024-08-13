@@ -66,7 +66,7 @@ export const SignUpForm = (): JSX.Element => {
 
       const user = await getProfile();
 
-      router.push("/");
+      router.push("/", { scroll: false });
       router.refresh();
 
       dispatch(login());

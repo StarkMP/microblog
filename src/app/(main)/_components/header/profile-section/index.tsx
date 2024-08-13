@@ -8,7 +8,7 @@ import { IconLogout } from "@tabler/icons-react";
 import { useRouter } from "next/navigation";
 import { type JSX, useEffect } from "react";
 
-import styles from "./profile-section.module.scss";
+import styles from "./styles.module.scss";
 
 export const ProfileSection = (): JSX.Element => {
   const router = useRouter();
@@ -18,14 +18,14 @@ export const ProfileSection = (): JSX.Element => {
   const handleLogout = (): void => {
     logoutServerAction();
 
-    router.push("/");
+    router.push("/", { scroll: false });
     router.refresh();
 
     dispatch(logout());
   };
 
   const redirectToProfile = (): void => {
-    router.push("/me");
+    router.push("/me", { scroll: false });
   };
 
   useEffect(() => {

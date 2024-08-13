@@ -11,7 +11,7 @@ export default function SignUpPage(): JSX.Element {
 
   const onClose = (): void => {
     close();
-    router.push("/");
+    router.push("/", { scroll: false });
   };
 
   return <SignUpModal opened={opened} onClose={onClose} />;
