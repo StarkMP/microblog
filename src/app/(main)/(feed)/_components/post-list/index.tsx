@@ -27,7 +27,6 @@ export const PostList = ({
 }: PostListProps): JSX.Element => {
   const [posts, setPosts] = useState(data.posts);
   const [hasMore, setHasMore] = useState(data.total > 0 && data.posts.length < data.total);
-  const [fetching, setFetching] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const search = useAppSelector((state) => state.feed.search);
@@ -43,10 +42,10 @@ export const PostList = ({
 
   useDidUpdateEffect(() => {
     if (tag) {
+      clearSearchTimeout();
       setPosts([]);
       setHasMore(true);
       setError(false);
-      setFetching(false);
       setLoading(false);
 
       // refresh router to change metadata
@@ -68,7 +67,6 @@ export const PostList = ({
 
     setError(false);
     setHasMore(true);
-    setFetching(false);
 
     clearSearchTimeout();
 
@@ -106,13 +104,7 @@ export const PostList = ({
   };
 
   const fetchPosts = async (startOffset?: boolean, fullLoader?: boolean): Promise<void> => {
-    if (fetching || error) {
-      return;
-    }
-
     const currentSearchValue = searchRef.current;
-
-    setFetching(true);
 
     if (fullLoader) {
       setLoading(true);
@@ -154,7 +146,6 @@ export const PostList = ({
 
       console.error(err);
     } finally {
-      setFetching(false);
       setLoading(false);
     }
   };
