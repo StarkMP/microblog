@@ -1,12 +1,11 @@
 import { getPosts } from "@app/actions/feed";
+import { FEED_POSTS_LOADING_LIMIT } from "@constants";
 import type { JSX } from "react";
 
 import { PostList } from "./_components";
 
-const INITIAL_POSTS_LIMIT = 10 as const;
-
 export default async function FeedPage(): Promise<JSX.Element> {
-  const data = await getPosts(INITIAL_POSTS_LIMIT, 0);
+  const data = await getPosts({ limit: FEED_POSTS_LOADING_LIMIT, offset: 0 });
 
-  return <PostList limit={INITIAL_POSTS_LIMIT} offset={0} data={data} />;
+  return <PostList limit={FEED_POSTS_LOADING_LIMIT} offset={0} data={data} />;
 }

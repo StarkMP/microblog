@@ -22,7 +22,7 @@ export const Navigation = (): JSX.Element => {
 
   return (
     <Stack className={styles.wrapper}>
-      <Stack mb="sm" gap="xs">
+      <Stack gap="xs">
         {categories.map(({ id, label }) => {
           const categoryPath = id ? `/category/${id}` : "/";
           const match = pathname === categoryPath;
