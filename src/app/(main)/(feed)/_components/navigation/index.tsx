@@ -3,8 +3,7 @@
 import { Anchor, Card, NavLink, Stack, Text } from "@mantine/core";
 import { LogoIcon } from "@ui/icons";
 import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
-import { ParsedUrlQueryInput } from "querystring";
+import { usePathname } from "next/navigation";
 import type { JSX } from "react";
 
 import styles from "./styles.module.scss";
@@ -20,14 +19,13 @@ const categories = [
 
 export const Navigation = (): JSX.Element => {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
 
   return (
     <Stack className={styles.wrapper}>
       <Stack mb="sm" gap="xs">
         {categories.map(({ id, label }) => {
-          const queryParamName = "category";
-          const hasQueryParam = searchParams.has(queryParamName);
+          const categoryPath = id ? `/category/${id}` : "/";
+          const match = pathname === categoryPath;
 
           return (
             <NavLink
@@ -35,29 +33,13 @@ export const Navigation = (): JSX.Element => {
               component={Link}
               prefetch
               scroll={false}
-              href={{
-                query: id && {
-                  ...Array.from(searchParams.entries()).reduce(
-                    (memo: ParsedUrlQueryInput, [key, value]) => {
-                      memo[key] = value;
-
-                      return memo;
-                    },
-                    {}
-                  ),
-                  [queryParamName]: id,
-                },
-                pathname,
-              }}
+              href={categoryPath}
               label={label}
               classNames={{
                 root: styles.navlink,
                 label: styles.navlinkLabel,
               }}
-              active={
-                (hasQueryParam && searchParams.get(queryParamName) === id) ||
-                (!id && !hasQueryParam)
-              }
+              active={match}
             />
           );
         })}
