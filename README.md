@@ -1,5 +1,7 @@
 # Microblog
 
+Social twitter-like fake application with REST API and authentication system based on [DummyJSON](https://dummyjson.com). Work in progress.
+
 > DEMO: https://microblog-starkmp.vercel.app
 
 ### Requirements
