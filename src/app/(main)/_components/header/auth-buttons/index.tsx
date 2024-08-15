@@ -1,5 +1,6 @@
 "use client";
 
+import { MODAL_FADE_TRANSITION_DELAY } from "@constants";
 import { LoginModal, SignUpModal } from "@features";
 import { Button, Group } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
@@ -10,6 +11,16 @@ export const AuthorizationButtons = (): JSX.Element => {
   const [loginModalOpened, { close: closeLoginModal, open: openLoginModal }] = useDisclosure(false);
   const [signUpModalOpened, { close: closeSignUpModal, open: openSignUpModal }] =
     useDisclosure(false);
+
+  const handleSwitchModal = (isLogin: boolean): void => {
+    if (isLogin) {
+      closeLoginModal();
+      setTimeout(openSignUpModal, MODAL_FADE_TRANSITION_DELAY);
+    } else {
+      closeSignUpModal();
+      setTimeout(openLoginModal, MODAL_FADE_TRANSITION_DELAY);
+    }
+  };
 
   return (
     <>
@@ -27,8 +38,16 @@ export const AuthorizationButtons = (): JSX.Element => {
         </Button>
       </Group>
 
-      <LoginModal opened={loginModalOpened} onClose={closeLoginModal} />
-      <SignUpModal opened={signUpModalOpened} onClose={closeSignUpModal} />
+      <LoginModal
+        opened={loginModalOpened}
+        onClose={closeLoginModal}
+        onSwitch={(): void => handleSwitchModal(true)}
+      />
+      <SignUpModal
+        opened={signUpModalOpened}
+        onClose={closeSignUpModal}
+        onSwitch={(): void => handleSwitchModal(false)}
+      />
     </>
   );
 };

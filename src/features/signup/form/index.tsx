@@ -17,11 +17,10 @@ import { useForm } from "@mantine/form";
 import { useAppDispatch } from "@store/hooks";
 import { login, updateUserData } from "@store/reducers/user";
 import { SignUpData } from "@typings/auth";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { type JSX, useState } from "react";
 
-export const SignUpForm = (): JSX.Element => {
+export const SignUpForm = ({ onSwitch }: { onSwitch: () => void }): JSX.Element => {
   const [fetching, setFetching] = useState(false);
   const [error, setError] = useState(false);
   const dispatch = useAppDispatch();
@@ -154,7 +153,7 @@ export const SignUpForm = (): JSX.Element => {
       </Card>
 
       <Group justify="space-between">
-        <Anchor fz="xs" component={Link} scroll={false} href="/login">
+        <Anchor fz="xs" onClick={onSwitch}>
           Already have an account? Sign In
         </Anchor>
         <Button type="submit" loading={fetching}>

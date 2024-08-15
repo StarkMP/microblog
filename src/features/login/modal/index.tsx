@@ -8,12 +8,13 @@ import { LoginForm } from "../form";
 type LoginModalProps = {
   opened: boolean;
   onClose: () => void;
+  onSwitch: () => void;
 };
 
-export const LoginModal = ({ opened, onClose }: LoginModalProps): JSX.Element => {
+export const LoginModal = ({ opened, onClose, onSwitch }: LoginModalProps): JSX.Element => {
   return (
     <Modal opened={opened} onClose={onClose} title="Sign In" radius="md">
-      <LoginForm />
+      <LoginForm onSwitch={onSwitch} />
     </Modal>
   );
 };
