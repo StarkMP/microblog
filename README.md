@@ -1,5 +1,7 @@
 # Microblog
 
+> DEMO: https://microblog-starkmp.vercel.app
+
 ### Requirements
 
 - [Node.js](https://nodejs.org) v.18.0.0^
@@ -9,6 +11,10 @@
 ```sh
 npm install
 ```
+
+### Define variables for `.env` or `.env.development`
+
+> Don't forget to do it. You can copy vars from `.env.example` and create new environment files.
 
 ### Build production
 
