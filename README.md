@@ -4,7 +4,7 @@
 
 ### Requirements
 
-- [Node.js](https://nodejs.org) v.18.0.0^
+- [Node.js](https://nodejs.org) v.20^
 
 ### Install packages
 
