@@ -31,7 +31,7 @@ export const Rightbar = ({ trendingTags }: RightbarProps): JSX.Element => {
   }, [pathname]);
 
   return (
-    <Stack pos="sticky" top={theme.spacing.md}>
+    <Stack pos={{ lg: "sticky", md: "static" }} top={theme.spacing.md}>
       <TextInput
         radius="md"
         variant="filled"
@@ -44,7 +44,7 @@ export const Rightbar = ({ trendingTags }: RightbarProps): JSX.Element => {
       />
       <Card padding="sm" radius="md">
         <Stack gap="xs">
-          <Title order={4} fw={600}>
+          <Title order={4} fw={theme.other.fontWeight.semiBold}>
             Trending tags:
           </Title>
           <Stack gap="sm">

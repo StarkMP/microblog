@@ -180,7 +180,7 @@ export const PostList = ({
         {!hasMore && !posts.length && (
           <Stack align="center" gap="md" p="lg">
             {search ? <IconSearch size={36} /> : <IconMoodConfuzedFilled size={36} />}
-            <Text ta="center" size="md" fw={500}>
+            <Text ta="center" size="md" fw={theme.other.fontWeight.medium}>
               {search ? "There are no results for your search request :(" : "There are no posts"}
             </Text>
           </Stack>

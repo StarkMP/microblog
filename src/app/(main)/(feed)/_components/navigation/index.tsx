@@ -1,6 +1,6 @@
 "use client";
 
-import { Anchor, Card, NavLink, Stack, Text } from "@mantine/core";
+import { Anchor, Card, NavLink, Stack, Text, useMantineTheme } from "@mantine/core";
 import { LogoIcon } from "@ui/icons";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -19,9 +19,10 @@ const categories = [
 
 export const Navigation = (): JSX.Element => {
   const pathname = usePathname();
+  const theme = useMantineTheme();
 
   return (
-    <Stack className={styles.wrapper}>
+    <Stack pos={{ lg: "sticky", md: "static" }} top={theme.spacing.md}>
       <Stack gap="xs">
         {categories.map(({ id, label }) => {
           const categoryPath = id ? `/category/${id}` : "/";

@@ -1,15 +1,10 @@
-.wrapper {
-  top: var(--mantine-spacing-md);
-  position: sticky;
-}
-
 .navlink {
   border-radius: var(--mantine-radius-md);
 }
 
 .navlinkLabel {
   font-size: var(--mantine-font-size-lg);
-  font-weight: 600;
+  font-weight: $mantine-font-weight-semibold;
 }
 
 .logo {

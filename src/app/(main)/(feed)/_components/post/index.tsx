@@ -1,4 +1,4 @@
-import { Avatar, Badge, Card, Group, Text, Title } from "@mantine/core";
+import { Avatar, Badge, Card, Group, Text, Title, useMantineTheme } from "@mantine/core";
 import { IconEye, IconMessageCircle, IconThumbDown, IconThumbUp } from "@tabler/icons-react";
 import type { JSX } from "react";
 
@@ -27,6 +27,8 @@ export const Post = ({
   body,
   tags,
 }: PostProps): JSX.Element => {
+  const theme = useMantineTheme();
+
   return (
     <Card shadow="sm" padding="md" radius="md" className={styles.wrapper}>
       <Group justify="space-between" align="center" mb="md">
@@ -42,12 +44,22 @@ export const Post = ({
 
         <Group gap={6}>
           {likes && (
-            <Badge color="green" variant="light" fw={500} rightSection={<IconThumbUp size={16} />}>
+            <Badge
+              color="green"
+              variant="light"
+              fw={theme.other.fontWeight.medium}
+              rightSection={<IconThumbUp size={16} />}
+            >
               {likes}
             </Badge>
           )}
           {dislikes && (
-            <Badge color="red" variant="light" fw={500} rightSection={<IconThumbDown size={16} />}>
+            <Badge
+              color="red"
+              variant="light"
+              fw={theme.other.fontWeight.medium}
+              rightSection={<IconThumbDown size={16} />}
+            >
               {dislikes}
             </Badge>
           )}
@@ -55,13 +67,18 @@ export const Post = ({
             <Badge
               color="gray"
               variant="light"
-              fw={500}
+              fw={theme.other.fontWeight.medium}
               rightSection={<IconMessageCircle size={16} />}
             >
               {comments}
             </Badge>
           )}
-          <Badge color="gray" variant="light" fw={500} rightSection={<IconEye size={16} />}>
+          <Badge
+            color="gray"
+            variant="light"
+            fw={theme.other.fontWeight.medium}
+            rightSection={<IconEye size={16} />}
+          >
             {views}
           </Badge>
         </Group>
