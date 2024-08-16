@@ -1,29 +1,29 @@
-@use 'sass:math';
+@use "sass:math";
 
-$mantine-breakpoint-xs: '36em';
-$mantine-breakpoint-sm: '48em';
-$mantine-breakpoint-md: '62em';
-$mantine-breakpoint-lg: '75em';
-$mantine-breakpoint-xl: '88em';
+$mantine-breakpoint-xs: "36em";
+$mantine-breakpoint-sm: "48em";
+$mantine-breakpoint-md: "62em";
+$mantine-breakpoint-lg: "75em";
+$mantine-breakpoint-xl: "88em";
 
-$mantine-font-weight-light: '300';
-$mantine-font-weight-normal: '400';
-$mantine-font-weight-medium: '500';
-$mantine-font-weight-semibold: '600';
-$mantine-font-weight-bold: '700';
+$mantine-font-weight-light: "300";
+$mantine-font-weight-normal: "400";
+$mantine-font-weight-medium: "500";
+$mantine-font-weight-semibold: "600";
+$mantine-font-weight-bold: "700";
 
 @function rem($value) {
   @return #{math.div(math.div($value, $value * 0 + 1), 16)}rem;
 }
 
 @mixin light {
-  [data-mantine-color-scheme='light'] & {
+  [data-mantine-color-scheme="light"] & {
     @content;
   }
 }
 
 @mixin dark {
-  [data-mantine-color-scheme='dark'] & {
+  [data-mantine-color-scheme="dark"] & {
     @content;
   }
 }
@@ -56,13 +56,13 @@ $mantine-font-weight-bold: '700';
 
 // Add direction mixins if you need rtl support
 @mixin rtl {
-  [dir='rtl'] & {
+  [dir="rtl"] & {
     @content;
   }
 }
 
 @mixin ltr {
-  [dir='ltr'] & {
+  [dir="ltr"] & {
     @content;
   }
 }
