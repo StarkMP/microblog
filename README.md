@@ -41,6 +41,7 @@ npm run dev
 #### Pre-commit checklist
 
 - [x] Run: `npm run format`
+- [x] Run: `npm run typecheck`
 - [x] Run: `npm run lint`
 
 #### Technology stack
