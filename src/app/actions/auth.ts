@@ -98,3 +98,23 @@ export const logout = (): void => {
   cookieStore.delete(ACCESS_TOKEN_COOKIE_NAME);
   cookieStore.delete(REFRESH_TOKEN_COOKIE_NAME);
 };
+
+export const checkSession = async (): Promise<boolean> => {
+  const cookieStore = cookies();
+
+  const hasAccessToken = cookieStore.has(ACCESS_TOKEN_COOKIE_NAME);
+
+  if (hasAccessToken) {
+    return true;
+  }
+
+  const refreshToken = cookieStore.get(REFRESH_TOKEN_COOKIE_NAME)?.value;
+
+  if (!refreshToken) {
+    return false;
+  }
+
+  await refresh(refreshToken);
+
+  return true;
+};

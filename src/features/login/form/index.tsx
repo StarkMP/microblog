@@ -2,6 +2,7 @@
 
 import { auth } from "@app/actions/auth";
 import { getProfile } from "@app/actions/private/user";
+import { useFetch } from "@hooks";
 import { Anchor, Button, Card, Group, PasswordInput, Text, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useAppDispatch } from "@store/hooks";
@@ -14,6 +15,8 @@ export const LoginForm = ({ onSwitch }: { onSwitch: () => void }): JSX.Element =
   const [fetching, setFetching] = useState(false);
   const [error, setError] = useState(false);
   const dispatch = useAppDispatch();
+  const [fetchAuth] = useFetch(auth);
+  const [fetchProfile] = useFetch(getProfile, { withAuth: true });
 
   const router = useRouter();
 
@@ -32,9 +35,9 @@ export const LoginForm = ({ onSwitch }: { onSwitch: () => void }): JSX.Element =
     setFetching(true);
 
     try {
-      await auth({ username, password });
+      await fetchAuth({ username, password });
 
-      const user = await getProfile();
+      const user = await fetchProfile();
 
       router.push("/", { scroll: false });
       router.refresh();

@@ -1,3 +1,5 @@
+import "server-only";
+
 import { ACCESS_TOKEN_COOKIE_NAME } from "@constants";
 import { cookies } from "next/headers";
 
