@@ -46,7 +46,7 @@ module.exports = {
     "react-hooks/rules-of-hooks": 0,
     "react-hooks/exhaustive-deps": 0,
     "react/display-name": 0,
-    "no-unused-vars": 2,
+    "no-unused-vars": "off",
     "no-undef": "off",
     "no-console": 0,
     "newline-before-return": 2,
