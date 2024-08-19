@@ -1,7 +1,6 @@
 "use client";
 
 import { auth } from "@app/actions/auth";
-import { getProfile } from "@app/actions/private/user";
 import { signUp } from "@app/actions/signup";
 import { useFetch } from "@hooks";
 import {
@@ -15,21 +14,14 @@ import {
   TextInput,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { useAppDispatch } from "@store/hooks";
-import { login, updateUserData } from "@store/reducers/user";
 import { SignUpData } from "@typings/auth";
-import { useRouter } from "next/navigation";
 import { type JSX, useState } from "react";
 
 export const SignUpForm = ({ onSwitch }: { onSwitch: () => void }): JSX.Element => {
   const [fetching, setFetching] = useState(false);
   const [error, setError] = useState(false);
-  const dispatch = useAppDispatch();
   const [fetchSignUp] = useFetch(signUp);
   const [fetchAuth] = useFetch(auth);
-  const [fetchProfile] = useFetch(getProfile, { withAuth: true });
-
-  const router = useRouter();
 
   const form = useForm({
     mode: "uncontrolled",
@@ -67,13 +59,7 @@ export const SignUpForm = ({ onSwitch }: { onSwitch: () => void }): JSX.Element 
 
       await fetchAuth({ username, password });
 
-      const user = await fetchProfile();
-
-      router.push("/", { scroll: false });
-      router.refresh();
-
-      dispatch(login());
-      dispatch(updateUserData(user));
+      window.location.reload();
     } catch (err) {
       setError(true);
     } finally {

@@ -92,7 +92,7 @@ export const refresh = async (
   return json;
 };
 
-export const logout = (): void => {
+export const logout = async (): Promise<void> => {
   const cookieStore = cookies();
 
   cookieStore.delete(ACCESS_TOKEN_COOKIE_NAME);

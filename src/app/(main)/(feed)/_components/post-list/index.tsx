@@ -42,6 +42,8 @@ export const PostList = ({
 
   useDidUpdateEffect(() => {
     if (tag) {
+      window.scrollTo({ top: 0 });
+
       clearSearchTimeout();
       setPosts([]);
       setHasMore(true);
@@ -166,6 +168,7 @@ export const PostList = ({
           return (
             <Post
               key={post.id}
+              id={post.id}
               title={title}
               body={body}
               tags={tags}
@@ -173,7 +176,7 @@ export const PostList = ({
               likes={likes}
               dislikes={dislikes}
               comments={0}
-              authorName="EmilyJohnson"
+              authorName="DummyJSON"
             />
           );
         })}

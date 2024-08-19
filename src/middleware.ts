@@ -2,10 +2,10 @@ import { refresh } from "@app/actions/auth";
 import { ACCESS_TOKEN_COOKIE_NAME, REFRESH_TOKEN_COOKIE_NAME } from "@constants";
 import { type NextRequest, NextResponse } from "next/server";
 
-const privateRoutes = ["/me"];
-const onlyUnauthorizedRoutes = ["/login", "/signup"];
+const privateRoutes: string[] = ["/me"];
+const onlyUnauthorizedRoutes: string[] = [];
 
-const unauthorizedRedirectRoute = "/login";
+const unauthorizedRedirectRoute = "/?auth=login";
 const authorizedRedirectRoute = "/";
 
 export async function middleware(request: NextRequest): Promise<NextResponse | void> {

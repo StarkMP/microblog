@@ -38,6 +38,7 @@ module.exports = {
     "@typescript-eslint/no-explicit-any": 0,
     "@typescript-eslint/ban-types": 0,
     "@typescript-eslint/no-floating-promises": 0,
+    "@typescript-eslint/require-await": 0,
     "jsx-quotes": ["error", "prefer-double"],
     "react/jsx-fragments": ["error", "syntax"],
     "react/jsx-uses-react": "error",

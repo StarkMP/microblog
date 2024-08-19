@@ -1,10 +1,12 @@
-import { Avatar, Badge, Card, Group, Text, Title, useMantineTheme } from "@mantine/core";
+"use client";
+
+import { Anchor, Avatar, Badge, Card, Group, Text, useMantineTheme } from "@mantine/core";
 import { IconEye, IconMessageCircle, IconThumbDown, IconThumbUp } from "@tabler/icons-react";
+import Link from "next/link";
 import type { JSX } from "react";
 
-import styles from "./styles.module.scss";
-
 type PostProps = {
+  id: number;
   authorName: string;
   // creationDate: Date;
   likes?: number;
@@ -17,6 +19,7 @@ type PostProps = {
 };
 
 export const Post = ({
+  id,
   authorName,
   // creationDate,
   likes,
@@ -30,12 +33,10 @@ export const Post = ({
   const theme = useMantineTheme();
 
   return (
-    <Card shadow="sm" padding="md" radius="md" className={styles.wrapper}>
+    <Card component="article" shadow="sm" padding="md" radius="md">
       <Group justify="space-between" align="center" mb="md">
         <Group align="center" gap={8}>
-          <Avatar color="pink" radius="xl" size="sm">
-            {authorName[0].toUpperCase()}
-          </Avatar>
+          <Avatar name={authorName} color="initials" radius="xl" size="sm" />
           <Text size="sm">{authorName}</Text>
           <Text size="xs" c="dimmed" lh={1}>
             4 hours ago
@@ -84,9 +85,9 @@ export const Post = ({
         </Group>
       </Group>
 
-      <Group justify="space-between" mb="xs">
-        <Title order={4}>{title}</Title>
-      </Group>
+      <Anchor fz="h4" fw="bold" c="gray" component={Link} href={`/post/${id}`} mb="xs">
+        {title}
+      </Anchor>
 
       <Text size="sm" mb="lg">
         {body}

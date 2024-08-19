@@ -38,6 +38,8 @@
       "@translations/*": ["./src/translations/*"],
       "@app": ["./src/app"],
       "@app/*": ["./src/app/*"],
+      "@context": ["./src/context"],
+      "@context/*": ["./src/context/*"],
       "@package-json": ["./package.json"],
       "@constants": ["./src/constants"],
       "@theme": ["./src/theme"]

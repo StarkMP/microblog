@@ -2,26 +2,28 @@
 
 import { logout as logoutServerAction } from "@app/actions/auth";
 import { ActionIcon, Avatar, Group, Text } from "@mantine/core";
-import { useAppDispatch, useAppSelector } from "@store/hooks";
-import { logout } from "@store/reducers/user";
+import { useAppSelector } from "@store/hooks";
 import { IconLogout } from "@tabler/icons-react";
 import { useRouter } from "next/navigation";
-import { type JSX, useEffect } from "react";
+import { type JSX, useEffect, useState } from "react";
 
 import styles from "./styles.module.scss";
 
 export const ProfileSection = (): JSX.Element => {
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const userData = useAppSelector((state) => state.user.data);
-  const dispatch = useAppDispatch();
 
   const handleLogout = (): void => {
-    logoutServerAction();
+    logoutUser();
+  };
 
-    router.push("/", { scroll: false });
-    router.refresh();
+  const logoutUser = async (): Promise<void> => {
+    setLoading(true);
 
-    dispatch(logout());
+    await logoutServerAction();
+
+    window.location.reload();
   };
 
   const redirectToProfile = (): void => {
@@ -32,17 +34,17 @@ export const ProfileSection = (): JSX.Element => {
     router.prefetch("/me");
   }, []);
 
+  const fullName = `${userData.firstName} ${userData.lastName}`;
+
   return (
     <Group gap="lg">
       <Group align="center" gap={8} onClick={redirectToProfile} className={styles.profileLink}>
-        <Avatar color="pink" radius="xl" size={28}>
-          {userData?.username[0].toUpperCase()}
-        </Avatar>
+        <Avatar name={fullName} color="initials" radius="xl" size={28} />
         <Text fw="bold" size="sm">
-          {userData?.username}
+          {fullName}
         </Text>
       </Group>
-      <ActionIcon size="lg" variant="default" onClick={handleLogout}>
+      <ActionIcon disabled={loading} size="lg" variant="default" onClick={handleLogout}>
         <IconLogout size={20} />
       </ActionIcon>
     </Group>

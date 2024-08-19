@@ -1,13 +1,16 @@
 import "@mantine/core/styles.css";
+import "@mantine/notifications/styles.css";
 
 import { getProfile } from "@app/actions/private/user";
 import StoreProvider from "@app/store-provider";
 import { ACCESS_TOKEN_COOKIE_NAME, REFRESH_TOKEN_COOKIE_NAME } from "@constants";
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
+import { Notifications } from "@mantine/notifications";
 import { theme } from "@theme";
 import { headersSetCookie } from "@utils/cookie";
 import { cookies } from "next/headers";
 import type { JSX, ReactNode } from "react";
+import { AuthModalsProvider } from "src/context";
 
 export const metadata = {
   title: "MicroBlog - Share your outlook and knowledges",
@@ -38,7 +41,9 @@ export default async function RootLayout({
       <body>
         <StoreProvider isAuth={hasAccessToken} user={user} refreshToken={refreshToken}>
           <MantineProvider defaultColorScheme="dark" theme={theme}>
-            {children}
+            <AuthModalsProvider>{children}</AuthModalsProvider>
+
+            <Notifications />
           </MantineProvider>
         </StoreProvider>
       </body>

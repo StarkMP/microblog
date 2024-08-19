@@ -3,14 +3,23 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 export type UserState = {
   isAuth: boolean;
   data: {
+    id: number;
     username: string;
     email: string;
-  } | null;
+    firstName: string;
+    lastName: string;
+  };
 };
 
 const initialState: UserState = {
   isAuth: false,
-  data: null,
+  data: {
+    id: 0,
+    username: "",
+    email: "",
+    firstName: "",
+    lastName: "",
+  },
 };
 
 export const userSlice = createSlice({
@@ -22,7 +31,7 @@ export const userSlice = createSlice({
     },
     logout: (state) => {
       state.isAuth = false;
-      state.data = null;
+      state.data = initialState.data;
     },
     updateUserData: (state, action: PayloadAction<UserState["data"]>) => {
       state.data = action.payload;
