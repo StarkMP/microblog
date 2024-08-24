@@ -1,11 +1,10 @@
 import { getPostsByTag } from "@app/actions/feed";
 import { FEED_POSTS_LOADING_LIMIT } from "@constants";
+import { PostList } from "@features";
 import { Stack, Title } from "@mantine/core";
 import { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import type { JSX } from "react";
-
-import { PostList } from "../../_components";
 
 type TagPageParams = { slug: string };
 

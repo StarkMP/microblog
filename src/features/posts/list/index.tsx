@@ -8,7 +8,7 @@ import type { APIGetPostsResponse } from "@typings/api";
 import { type JSX, useEffect, useRef, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-import { FeedLoader, Post } from "..";
+import { Post, PostsLoader } from "..";
 
 type PostListProps = {
   data: APIGetPostsResponse;
@@ -138,7 +138,7 @@ export const PostList = ({
       next={fetchPosts}
       hasMore={hasMore}
       // 6 - for the full loader, 1 - for just a scroll loader
-      loader={<FeedLoader count={loading ? 6 : 1} />}
+      loader={<PostsLoader count={loading ? 6 : 1} />}
     >
       <Stack gap="sm">
         {posts.map((post) => {
