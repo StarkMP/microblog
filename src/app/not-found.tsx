@@ -13,7 +13,7 @@ export default function NotFound(): JSX.Element {
         <Title order={1}>404</Title>
         <Text c="dimmed" fz="sm">
           Page not found.{" "}
-          <Anchor inherit component={Link} prefetch scroll={false} href="/">
+          <Anchor inherit component={Link} scroll={false} href="/">
             Return
           </Anchor>{" "}
           to the home page.

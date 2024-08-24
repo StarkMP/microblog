@@ -32,7 +32,6 @@ export const Navigation = (): JSX.Element => {
             <NavLink
               key={id}
               component={Link}
-              prefetch
               scroll={false}
               href={categoryPath}
               label={label}

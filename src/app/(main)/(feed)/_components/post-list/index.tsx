@@ -1,12 +1,10 @@
 "use client";
 
 import { getPosts, getPostsByTag } from "@app/actions/feed";
-import { useDidUpdateEffect } from "@hooks";
 import { Stack, Text, useMantineTheme } from "@mantine/core";
 import { useAppSelector } from "@store/hooks";
 import { IconCircleX, IconMoodConfuzedFilled, IconSearch } from "@tabler/icons-react";
 import type { APIGetPostsResponse } from "@typings/api";
-import { useRouter } from "next/navigation";
 import { type JSX, useEffect, useRef, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
@@ -34,28 +32,10 @@ export const PostList = ({
   const searchTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const offsetRef = useRef<number>(initialOffset);
   const theme = useMantineTheme();
-  const router = useRouter();
 
   useEffect(() => {
     window.scrollTo({ top: 0 });
   }, []);
-
-  useDidUpdateEffect(() => {
-    if (tag) {
-      window.scrollTo({ top: 0 });
-
-      clearSearchTimeout();
-      setPosts([]);
-      setHasMore(true);
-      setError(false);
-      setLoading(false);
-
-      // refresh router to change metadata
-      router.refresh();
-
-      fetchPosts(true, true);
-    }
-  }, [tag]);
 
   useEffect(() => {
     // we should turn off the search if we use tag post list
