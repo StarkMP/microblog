@@ -38,7 +38,7 @@ export const Rightbar = ({ trendingTags }: RightbarProps): JSX.Element => {
         leftSection={<IconSearch size={18} />}
         value={searchValue}
         onChange={handleSearch}
-        disabled={pathname === "/tag"}
+        disabled={pathname.startsWith("/tag/")}
       />
       <Card padding="sm" radius="md">
         <Stack gap="xs">
