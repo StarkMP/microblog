@@ -4,7 +4,7 @@
 // + we render only one instance of each modal. useful
 
 import { MODAL_FADE_TRANSITION_DELAY } from "@constants";
-import { LoginModal, SignUpModal } from "@features";
+import { LoginModal, SignUpModal } from "@components";
 import { useDisclosure } from "@mantine/hooks";
 import { useAppSelector } from "@store/hooks";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";

@@ -1,6 +1,6 @@
 import { getPosts } from "@app/actions/feed";
 import { FEED_POSTS_LOADING_LIMIT } from "@constants";
-import { PostList } from "@features";
+import { PostList } from "@components";
 import type { JSX } from "react";
 
 export default async function FeedPage(): Promise<JSX.Element> {

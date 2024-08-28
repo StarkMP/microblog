@@ -1,6 +1,6 @@
 import { getPostsByTag } from "@app/actions/feed";
 import { FEED_POSTS_LOADING_LIMIT } from "@constants";
-import { PostList } from "@features";
+import { PostList } from "@components";
 import { Stack, Title } from "@mantine/core";
 import { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
