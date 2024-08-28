@@ -43,6 +43,7 @@ npm run dev
 - [x] Run: `npm run format`
 - [x] Run: `npm run typecheck`
 - [x] Run: `npm run lint`
+- [x] Run: `npm run test`
 
 #### Technology stack
 
@@ -50,6 +51,7 @@ npm run dev
 - Next.js v14 (app router)
 - Mantine
 - Redux ToolKit
+- Vitest + RTL
 - SCSS Modules
 - Turbo
 

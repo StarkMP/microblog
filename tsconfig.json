@@ -42,7 +42,8 @@
       "@context/*": ["./src/context/*"],
       "@package-json": ["./package.json"],
       "@constants": ["./src/constants"],
-      "@theme": ["./src/theme"]
+      "@theme": ["./src/theme"],
+      "@test-utils": ["./src/test-utils"]
     },
     "allowJs": true,
     "incremental": true,
@@ -59,6 +60,7 @@
     ".next/types/**/*.ts",
     "postcss.config.cjs",
     "next-env.d.ts",
+    "vitest.config.ts",
     "next.config.mjs",
     ".eslintrc.js"
   ]

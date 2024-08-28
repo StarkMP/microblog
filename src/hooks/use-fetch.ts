@@ -1,9 +1,10 @@
 "use client";
 
 import { checkSession } from "@app/actions/auth";
+import { AsyncFunction } from "@typings/utils";
 import { useState } from "react";
 
-type UseFetchReturn<T extends (...args: any[]) => Promise<unknown>> = [
+type UseFetchReturn<T extends AsyncFunction> = [
   (...args: Parameters<T>) => Promise<Awaited<ReturnType<T>>>,
   {
     isError: boolean;
@@ -17,7 +18,7 @@ type UseFetchOptions = {
   withAuth?: boolean;
 };
 
-export const useFetch = <T extends (...args: any[]) => Promise<unknown>>(
+export const useFetch = <T extends AsyncFunction>(
   promiseFn: T,
   options?: UseFetchOptions
 ): UseFetchReturn<T> => {

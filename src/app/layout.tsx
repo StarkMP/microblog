@@ -3,7 +3,7 @@ import "@mantine/notifications/styles.css";
 
 import { getProfile } from "@app/actions/private/user";
 import StoreProvider from "@app/store-provider";
-import { ACCESS_TOKEN_COOKIE_NAME, REFRESH_TOKEN_COOKIE_NAME } from "@constants";
+import { ACCESS_TOKEN_COOKIE_NAME } from "@constants";
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
 import { theme } from "@theme";
@@ -25,7 +25,6 @@ export default async function RootLayout({
   const cookieStore = cookies();
   const hasAccessToken =
     cookieStore.has(ACCESS_TOKEN_COOKIE_NAME) || headersSetCookie().has(ACCESS_TOKEN_COOKIE_NAME);
-  const refreshToken = cookieStore.get(REFRESH_TOKEN_COOKIE_NAME)?.value;
   const user = hasAccessToken ? await getProfile() : undefined;
 
   return (
@@ -39,7 +38,7 @@ export default async function RootLayout({
         />
       </head>
       <body>
-        <StoreProvider isAuth={hasAccessToken} user={user} refreshToken={refreshToken}>
+        <StoreProvider isAuth={hasAccessToken} user={user}>
           <MantineProvider defaultColorScheme="dark" theme={theme}>
             <AuthModalsProvider>{children}</AuthModalsProvider>
 

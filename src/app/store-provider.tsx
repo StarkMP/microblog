@@ -9,12 +9,10 @@ import { Provider } from "react-redux";
 export default function StoreProvider({
   isAuth,
   user,
-  refreshToken,
   children,
 }: {
   isAuth: boolean;
   user?: APIUserResponse;
-  refreshToken?: string;
   children: ReactNode;
 }): JSX.Element {
   const storeRef = useRef<AppStore | null>(null);
