@@ -27,11 +27,13 @@ export const writeTokensToCookies = (
     maxAge: ACCESS_TOKEN_EXPIRES_IN_MINS * 60,
     httpOnly: true,
     secure: isProd,
+    sameSite: "strict",
   });
 
   cookieStore.set(REFRESH_TOKEN_COOKIE_NAME, refresh, {
     httpOnly: true,
     secure: isProd,
+    sameSite: "strict",
   });
 };
 
