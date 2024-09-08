@@ -3,8 +3,8 @@
 // I created this context module for better management of auth modals
 // + we render only one instance of each modal. useful
 
-import { MODAL_FADE_TRANSITION_DELAY } from "@constants";
 import { LoginModal, SignUpModal } from "@components";
+import { MODAL_FADE_TRANSITION_DELAY } from "@constants";
 import { useDisclosure } from "@mantine/hooks";
 import { useAppSelector } from "@store/hooks";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
